@@ -75,7 +75,7 @@ json_data.forEach(element => {
     myList.appendChild(listItem)
 })
 
-let closeButtons = document.getElementsByClassName("Delete")
+let closeButtons = document.getElementsByClassName("delete")
 for(let i = 0; i < closeButtons.length; i++){
     closeButtons[i].addEventListener('click', deleteTodo, false)
 }
