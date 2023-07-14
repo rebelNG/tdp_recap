@@ -48,3 +48,25 @@ button.onclick =()=> create(input.value);
 
 
 // button.onclick =()=> read(input.value);
+
+axios.get('https://api.example.com/pictures')
+  .then(response => {
+    const pictures = response.data; // Assuming the response data is an array of picture objects
+
+    // Process the pictures as needed
+    pictures.forEach(picture => {
+      // Access the picture URL or other relevant information
+      const imageUrl = picture.url;
+      
+      // Use the picture data to display images in your application
+      // Example: create an <img> element and set its source to the picture URL
+      const imgElement = document.createElement('img');
+      imgElement.src = imageUrl;
+
+      // Append the image element to a container or the DOM
+      document.body.appendChild(imgElement);
+    });
+  })
+  .catch(error => {
+    console.error('Error fetching pictures:', error);
+  })
