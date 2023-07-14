@@ -24,62 +24,91 @@
 //     }
 // }
 
-let json_data = [
-    {
-        userId: 1,
-        id: 1,
-        title: "quis ut nam facilis et officia qui",
-        completed: false
-    },
-    {
-        userId: 1,
-        id: 2,
-        title: "fugiat veniam minus",
-        completed: false
-    },
-    {
-        userId: 1,
-        id: 3,
-        title: "fugiat veniam minus",
-        completed: false
-    },
-    {
-        userId: 1,
-        id: 4,
-        title: "et porro tempora",
-        completed: true
-    },
-    {
-        userId: 1,
-        id: 5,
-        title: "laboriosam mollitia et enim quasi adipisci quia provident illum",
-        completed: false
-    }
-]
+// let json_data = [
+//     {
+//         userId: 1,
+//         id: 1,
+//         title: "quis ut nam facilis et officia qui",
+//         completed: false
+//     },
+//     {
+//         userId: 1,
+//         id: 2,
+//         title: "fugiat veniam minus",
+//         completed: false
+//     },
+//     {
+//         userId: 1,
+//         id: 3,
+//         title: "fugiat veniam minus",
+//         completed: false
+//     },
+//     {
+//         userId: 1,
+//         id: 4,
+//         title: "et porro tempora",
+//         completed: true
+//     },
+//     {
+//         userId: 1,
+//         id: 5,
+//         title: "laboriosam mollitia et enim quasi adipisci quia provident illum",
+//         completed: false
+//     }
+// ]
 
+let json_data = [];
 let myList = document.getElementById("todo-list")
 
 json_data.forEach(element => {
-    let listItem = document.createElement("li")
-    listItem.appendChild(
-        document.createTextNode(element.title)
-    )
-    let deleteLink = document.createElement("a")
-
-    deleteLink.href = "#"
-    deleteLink.className = "btn btn-sm btn-danger m-1 delete"
-    deleteLink.appendChild(
-        document.createTextNode("Delete")
-    )
-    listItem.appendChild(deleteLink)
-    myList.appendChild(listItem)
-})
-
-let closeButtons = document.getElementsByClassName("delete")
-for(let i = 0; i < closeButtons.length; i++){
-    closeButtons[i].addEventListener('click', deleteTodo, false)
+    newTodo(element.title);
+});
+eventListener();
+function eventListener(){
+    let closeButtons = document.getElementsByClassName("delete")
+    for(let i = 0; i < closeButtons.length; i++){
+        closeButtons[i].addEventListener('click', deleteTodo, false)
+    }
 }
+
 function deleteTodo(){
     let li = this.parentElement
     myList.removeChild(li)
+}
+
+// function newTodo() {
+//     let todoTitle = document.getElementById('todoTitle').value;
+//     if(todoTitle !== ''){
+//         let listItems = document.createElement('li');
+//     listItems.appendChild(document.createTextNode(todoTitle));
+//     let deleteLink = document.createElement('a');
+//     deleteLink.href = '#';
+//     deleteLink.className = "btn btn-sm btn-danger m-1 delete";
+//     deleteLink.appendChild(document.createTextNode("Delete"));
+//     listItems.appendChild(deleteLink);
+//     myList.appendChild(listItems);
+//     eventListener();
+//     console.log('New todo added');
+//   }
+// }
+
+function newTodoElement(todoTitle) {
+    let listItems = document.createElement('li');
+    listItems.appendChild(document.createTextNode(todoTitle));
+    let deleteLink = document.createElement('a');
+    deleteLink.href = '#';
+    deleteLink.className = "btn btn-sm btn-danger m-1 delete";
+    deleteLink.appendChild(document.createTextNode("Delete"));
+    listItems.appendChild(deleteLink);
+    myList.appendChild(listItems);
+  }
+  
+function newTodo() {
+    let todoTitle = document.getElementById('todoTitle').value;
+    if (todoTitle !== '') {
+      json_data.push({ title: todoTitle });
+      newTodoElement(todoTitle);
+      eventListener();
+      console.log('New todo added');
+    }
 }
